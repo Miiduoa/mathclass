@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>睡眠時間與生活滿意度研究 - 第九組</title>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+  <style>
+    :root {
+      --bg: #f5f7fa;
+      --card-bg: #fff;
+      --text: #333;
+      --primary: #4a90e2;
+      --accent: #f56c6c;
+      --blue: #50e3c2;
+      --yellow: #f5a623;
+      --purple: #9013fe;
+      --green: #b8e986;
+      --red: #d0021b;
+      --shadow: rgba(0,0,0,0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); font-family: 'Inter', sans-serif; color: var(--text); }
+    
+    /* 統一的容器樣式 */
+    .container {
+      width: 100%;
+      max-width: 960px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+    
+    .card { 
+      background: var(--card-bg); 
+      border-radius: 12px; 
+      box-shadow: 0 4px 16px var(--shadow); 
+      padding: 40px; 
+      width: 100%;
+    }
+    
+    /* 特殊頁面樣式 */
+    .slide { 
+      min-height: 100vh; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      background: var(--bg); 
+      padding: 20px;
+    }
+    
+    .slide .card {
+      margin: 0;
+    }
+    
+    h1, h2, h3 { color: #4a90e2; }
+    h1 { font-size: 2.5rem; margin-bottom: 16px; text-align: center; }
+    h2 { font-size: 2rem; margin-bottom: 12px; }
+    h3 { font-size: 1.5rem; margin: 16px 0 8px; }
+    p, li, td { font-size: 1rem; }
+    ul, ol { margin-left: 20px; margin-bottom: 16px; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+    .chart-container { width: 100%; max-width: 480px; margin: 16px auto; }
+    canvas { width: 100% !important; height: auto !important; }
+    .formula { background: #eef4fb; padding: 8px; border-radius: 6px; font-family: 'Courier New', monospace; margin-bottom: 16px; display: block; }
+    .explain { background: #fff8e1; padding: 10px; border-left: 4px solid #ffd54f; margin-bottom: 12px; }
+    .cover-title { font-size: 3rem; margin-bottom: 24px; }
+    .cover-sub { font-size: 1.25rem; color: #666; margin-bottom: 16px; }
+    .members { list-style: none; padding-left: 0; font-size: 1.2rem; }
+    .members li { margin-bottom: 8px; }
+    
+    /* 封底特殊樣式 */
+    .end-slide .card {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 400px;
+    }
+    
+    .end-slide h2 {
+      font-size: 2.5rem;
+      margin-bottom: 24px;
+    }
+    
+    .end-slide p {
+      font-size: 1.25rem;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 封面 -->
+  <div class="slide">
+    <div class="card">
+      <div style="text-align: center;">
+        <div class="cover-title">睡眠時間與生活滿意度之關聯性探討</div>
+        <div class="cover-sub">以 50 份便利樣本問卷為例</div>
+        <div class="cover-sub">第九組 報告</div>
+        <ul class="members">
+          <li>組長：楊世間</li>
+          <li>組員：吳容陞、顧晉瑋</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 摘要 -->
+  <div class="container">
+    <div class="card">
+      <h2>摘要</h2>
+      <ul>
+        <li>樣本：50 份有效問卷（大專學生與年輕上班族）。</li>
+        <li>平均睡眠：6.22 ± 1.46 小時／晚；t₍₄₉₎ = –3.77, p &lt; 0.001 (單樣本 t 檢定)。</li>
+        <li>睡眠不足比例：62％ (31/50)；Z = 1.70, p = 0.045 (單尾 Z 檢定)。</li>
+        <li>睡眠時數與自覺足夠感相關：χ²(1) = 18.0, p &lt; 0.001 (卡方檢定)。</li>
+        <li>94％ 受試者認為睡眠影響生活滿意度 (單樣本 Z 檢定 Z = 6.22, p &lt; 0.0001)。</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 研究動機 -->
+  <div class="container">
+    <div class="card">
+      <h2>1 研究動機</h2>
+      <p>成人理想睡眠為 7–9 小時╱夜，短睡眠與低滿意度、心理健康不良高度相關 (NSF, 2015)。</p>
+      <p>台灣睡眠醫學學會 2021 年調查：46％ 受訪者睡眠品質不佳，平均僅 6.67 小時。</p>
+    </div>
+  </div>
+
+  <!-- 研究目的 -->
+  <div class="container">
+    <div class="card">
+      <h2>2 研究目的</h2>
+      <ol>
+        <li>檢驗平均睡眠時數是否顯著低於 7 小時。</li>
+        <li>比較睡眠足夠╱不足與生活滿意度之關聯。</li>
+        <li>提出改善睡眠、提升滿意度之具體建議。</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- 研究方法 -->
+  <div class="container">
+    <div class="card">
+      <h2>3 研究方法</h2>
+      <table>
+        <tr><th>項目</th><th>說明</th></tr>
+        <tr><td>設計</td><td>橫斷面網路問卷</td></tr>
+        <tr><td>抽樣</td><td>便利抽樣：大學生、20–35 歲上班族</td></tr>
+        <tr><td>樣本</td><td>n = 50</td></tr>
+        <tr><td>變項</td><td>睡眠時數、自覺足夠感、滿意度認知</td></tr>
+        <tr><td>統計</td><td>描述統計、t 檢定、Z 檢定、卡方、95％ CI</td></tr>
+        <tr><td>顯著水準</td><td>α = 0.05 (雙尾；比例單尾)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 資料整理 -->
+  <div class="container">
+    <div class="card">
+      <h2>4 資料整理</h2>
+      <h3>4.1 睡眠時數原始頻數</h3>
+      <table>
+        <tr><th>時數</th><th>人數</th><th>時數</th><th>人數</th></tr>
+        <tr><td>2</td><td>1</td><td>6.5</td><td>1</td></tr>
+        <tr><td>3</td><td>1</td><td>7</td><td>6</td></tr>
+        <tr><td>4</td><td>2</td><td>8</td><td>12</td></tr>
+        <tr><td>5</td><td>11</td><td>9</td><td>1</td></tr>
+        <tr><td>5.5</td><td>1</td><td>—</td><td>—</td></tr>
+        <tr><td>6</td><td>14</td><td>總計</td><td>50</td></tr>
+      </table>
+      <h3>4.2 必要統計量</h3>
+      <p>Σxᵢ = 311；x̄ = 6.22 小時；s² = 2.14；s = 1.46 小時。</p>
+      <div class="chart-container"><canvas id="barDist"></canvas></div>
+    </div>
+  </div>
+
+  <!-- 問卷結果 -->
+  <div class="container">
+    <div class="card">
+      <h2>5 問卷結果圖表</h2>
+      <h3>5.1 睡眠影響生活滿意度</h3>
+      <div class="chart-container"><canvas id="chartInfluence"></canvas></div>
+      <h3>5.2 自覺睡眠足夠與否</h3>
+      <div class="chart-container"><canvas id="chartSufficiency"></canvas></div>
+      <h3>5.3 平均睡眠時數區間</h3>
+      <div class="chart-container"><canvas id="chartInterval"></canvas></div>
+      <h3>5.4 年齡分布</h3>
+      <div class="chart-container"><canvas id="pieAge"></canvas></div>
+      <h3>5.5 性別分布</h3>
+      <div class="chart-container"><canvas id="pieGender"></canvas></div>
+    </div>
+  </div>
+
+  <!-- 推論統計 -->
+  <div class="container">
+    <div class="card">
+      <h2>6 推論統計（完整計算）</h2>
+      <h3>6.1 單一樣本 t 檢定</h3>
+      <div class="explain">
+        <strong>目的：</strong>檢驗平均睡眠是否低於 7 小時。
+        <ul>
+          <li>x̄=6.22 (樣本均值)</li>
+          <li>μ₀=7 (母體假設值)</li>
+          <li>s=1.46 (樣本標準差)</li>
+          <li>n=50 (樣本數)</li>
+        </ul>
+      </div>
+      <p class="formula">t=(6.22-7)/(1.46/√50)=-3.77；df=49；p&lt;0.001</p>
+      <div class="explain">|-3.77|&gt;2.009，拒絕 H₀，平均睡眠顯著低於 7 小時。</div>
+      <p class="formula">95% CI=6.22±2.009×0.207=[5.80,6.64]</p>
+      <div class="explain">95% 信心下，母體平均睡眠介於 5.80–6.64 小時。</div>
+
+      <h3>6.2 Z 檢定：睡眠不足比例</h3>
+      <div class="explain">
+        <strong>目的：</strong>檢驗不足睡眠比例是否&gt;50%。
+        <ul>
+          <li>x=31 (不足人數)</li>
+          <li>p̂=0.62</li>
+          <li>p₀=0.5</li>
+          <li>n=50</li>
+        </ul>
+      </div>
+      <p class="formula">Z=(0.62-0.5)/√(0.25/50)=1.70；p=0.045</p>
+      <div class="explain">1.70&gt;1.645，拒絕 H₀，比例顯著高於 50%。</div>
+      <p class="formula">95% CI=0.62±1.96√(0.62×0.38/50)=[0.486,0.755]</p>
+      <div class="explain">比例真實範圍為 48.6%–75.5%。</div>
+
+      <h3>6.3 卡方獨立性檢定</h3>
+      <div class="explain">
+        <strong>目的：</strong>檢驗睡眠長短與自覺足夠感相關。
+      </div>
+      <table>
+        <tr><th></th><th>自覺足夠</th><th>自覺不足</th><th>合計</th></tr>
+        <tr><td>≥7 hr</td><td>16</td><td>3</td><td>19</td></tr>
+        <tr><td><7 hr</td><td>7</td><td>24</td><td>31</td></tr>
+        <tr><td>合計</td><td>23</td><td>27</td><td>50</td></tr>
+      </table>
+      <p class="formula">χ²=18.0；df=1；p&lt;0.001</p>
+      <div class="explain">18.0&gt;3.84，顯著相關。</div>
+
+      <h3>6.4 Z 檢定：滿意度影響比例</h3>
+      <div class="explain">
+        <strong>目的：</strong>檢驗認為影響滿意度比例是否&gt;50%。
+        <ul><li>p̂=47/50=0.94</li></ul>
+      </div>
+      <p class="formula">Z=(0.94-0.5)/√(0.94×0.06/50)=6.22；p&lt;0.0001</p>
+      <p class="formula">95% CI=[0.874,1.000]</p>
+      <div class="explain">比例介於 87.4%–100%。</div>
+    </div>
+  </div>
+
+  <!-- 討論 -->
+  <div class="container">
+    <div class="card">
+      <h2>7 討論</h2>
+      <ul>
+        <li>平均睡眠 6.22 小時，低於 NSF (2015) 建議 7–9 小時，也近台灣研究 6.67 小時。</li>
+        <li>Lin et al. (2024) 發現睡眠與滿意度正相關，本研究亦佐證此關聯。</li>
+        <li>影響因素：學業/工作壓力、電子設備使用、生理時鐘改變。</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 結論與建議 -->
+  <div class="container">
+    <div class="card">
+      <h2>8 結論與建議</h2>
+      <p>綜合研究結果與文獻：年輕族群睡眠普遍不足，且睡眠充足者滿意度較高，建議：</p>
+      <ul>
+        <li>個人：規律作息、減少晚間螢幕、優化睡眠環境。</li>
+        <li>學校/企業：推動睡眠衛教、彈性課工時。</li>
+        <li>公共衛生：宣導「睡眠 7+」，結合本研究、NSF、Lin et al. 結果。</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 研究限制與未來方向 -->
+  <div class="container">
+    <div class="card">
+      <h2>9 研究限制與未來方向</h2>
+      <ul>
+        <li>便利樣本 (n=50)，建議擴大樣本驗證。</li>
+        <li>滿意度未量表化，未來可納入 SWLS。</li>
+        <li>建議縱向研究並使用 Actigraphy 等客觀量測。</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 參考文獻 -->
+  <div class="container">
+    <div class="card">
+      <h2>10 參考文獻</h2>
+      <ol>
+        <li>National Sleep Foundation. Sleep Time Duration Recommendations. Sleep Health 1(1), 40-43 (2015).</li>
+        <li>台灣睡眠醫學學會．「飽睡好眠 活力一整天」行動方案（2021）。</li>
+        <li>Lin, X.-Y. et al. Sleep duration predicts life satisfaction: A longitudinal ARCL study. Frontiers in Sleep (2024).</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- 封底 -->
+  <div class="slide end-slide">
+    <div class="card">
+      <h2>感謝聆聽</h2>
+      <p>第九組 報告完畢</p>
+      <p>感謝指導老師與評閱同學的寶貴意見</p>
+    </div>
+  </div>
+
+  <script>
+    function initCharts() {
+      if (typeof Chart === 'undefined') {
+        console.log('Chart.js not loaded yet, retrying...');
+        setTimeout(initCharts, 100);
+        return;
+      }
+
+      // 長條圖
+      new Chart(document.getElementById('barDist'), {
+        type: 'bar',
+        data: {
+          labels: ['2','3','4','5','5.5','6','6.5','7','8','9'],
+          datasets: [{
+            label: '人數',
+            data: [1,1,2,11,1,14,1,6,12,1],
+            backgroundColor: '#4a90e2'
+          }]
+        },
+        options: { 
+          responsive: true,
+          scales: { y: { beginAtZero:true } } 
+        }
+      });
+
+      // 圓餅圖（皆無全黑、均為亮色）
+      new Chart(document.getElementById('chartInfluence'), {
+        type:'pie',
+        data:{ 
+          labels:['是','否'], 
+          datasets:[{ 
+            data:[94,6], 
+            backgroundColor:['#4a90e2','#f56c6c'] 
+          }] 
+        },
+        options: { responsive: true }
+      });
+      
+      new Chart(document.getElementById('chartSufficiency'), {
+        type:'pie',
+        data:{ 
+          labels:['是','否'], 
+          datasets:[{ 
+            data:[46,54], 
+            backgroundColor:['#4a90e2','#f56c6c'] 
+          }] 
+        },
+        options: { responsive: true }
+      });
+      
+      new Chart(document.getElementById('chartInterval'), {
+        type:'pie',
+        data:{ 
+          labels:['<4小時','4-5小時','6-7小時','8-9小時','>9小時'],
+          datasets:[{ 
+            data:[6,20,42,30,2], 
+            backgroundColor:['#4a90e2','#50e3c2','#f5a623','#9013fe','#b8e986'] 
+          }] 
+        },
+        options: { responsive: true }
+      });
+      
+      new Chart(document.getElementById('pieAge'), {
+        type:'pie',
+        data:{ 
+          labels:['12歲以下','13-18歲','19-25歲','26-40歲','41-60歲','60歲以上'],
+          datasets:[{ 
+            data:[4,6,21,15,7,3], 
+            backgroundColor:['#4a90e2','#50e3c2','#f5a623','#9013fe','#b8e986','#d0021b'] 
+          }] 
+        },
+        options: { responsive: true }
+      });
+      
+      new Chart(document.getElementById('pieGender'), {
+        type:'pie',
+        data:{ 
+          labels:['男','女'], 
+          datasets:[{ 
+            data:[21,29], 
+            backgroundColor:['#4a90e2','#f56c6c'] 
+          }] 
+        },
+        options: { responsive: true }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', initCharts);
+  </script>
+</body>
+</html>
