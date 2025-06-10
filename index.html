@@ -10,35 +10,50 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
   <style>
     :root {
-      --bg: #f5f7fa;
-      --card-bg: #fff;
-      --text: #333;
-      --primary: #4a90e2;
-      --accent: #f56c6c;
-      --blue: #50e3c2;
-      --yellow: #f5a623;
-      --purple: #9013fe;
-      --green: #b8e986;
-      --red: #d0021b;
-      --shadow: rgba(0,0,0,0.08);
+      --bg: #f8fafb;
+      --card-bg: #ffffff;
+      --text: #2c3e50;
+      --primary: #3498db;
+      --accent: #e74c3c;
+      --blue: #16a085;
+      --yellow: #f39c12;
+      --purple: #9b59b6;
+      --green: #27ae60;
+      --red: #e74c3c;
+      --shadow: rgba(0,0,0,0.06);
+      --border: #e1e8ed;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--bg); font-family: 'Inter', sans-serif; color: var(--text); }
+    
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+    }
+    
+    body { 
+      background: var(--bg); 
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
+      color: var(--text); 
+      line-height: 1.7;
+      font-size: 16px;
+    }
     
     /* 統一的容器樣式 */
     .container {
       width: 100%;
-      max-width: 960px;
-      margin: 20px auto;
-      padding: 0 20px;
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 30px;
     }
     
     .card { 
       background: var(--card-bg); 
-      border-radius: 12px; 
-      box-shadow: 0 4px 16px var(--shadow); 
-      padding: 40px; 
+      border-radius: 16px; 
+      box-shadow: 0 2px 20px var(--shadow); 
+      padding: 50px 45px; 
       width: 100%;
+      border: 1px solid var(--border);
+      margin-bottom: 25px;
     }
     
     /* 特殊頁面樣式 */
@@ -48,70 +63,199 @@
       justify-content: center; 
       align-items: center; 
       background: var(--bg); 
-      padding: 20px;
+      padding: 40px;
     }
     
     .slide .card {
       margin: 0;
+      box-shadow: 0 8px 32px rgba(52, 152, 219, 0.1);
     }
     
-    h1, h2, h3 { color: #4a90e2; }
-    h1 { font-size: 2.5rem; margin-bottom: 16px; text-align: center; }
-    h2 { font-size: 2rem; margin-bottom: 12px; }
-    h3 { font-size: 1.5rem; margin: 16px 0 8px; }
-    p, li, td { font-size: 1rem; }
-    ul, ol { margin-left: 20px; margin-bottom: 16px; }
-    table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
-    th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
-    .chart-container { width: 100%; max-width: 480px; margin: 16px auto; }
-    canvas { width: 100% !important; height: auto !important; }
-    .formula { 
-      background: linear-gradient(135deg, #eef4fb 0%, #f8fbff 100%); 
-      padding: 16px; 
-      border-radius: 8px; 
-      font-family: 'Times New Roman', serif; 
-      margin: 12px 0; 
-      display: block; 
-      font-size: 16px;
-      border-left: 4px solid #4a90e2;
-      box-shadow: 0 2px 8px rgba(74, 144, 226, 0.1);
+    /* 標題樣式改進 */
+    h1, h2, h3, h4 { 
+      color: var(--primary); 
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+    h1 { 
+      font-size: 2.8rem; 
+      line-height: 1.2; 
+      text-align: center; 
+      margin-bottom: 30px;
+    }
+    h2 { 
+      font-size: 2.2rem; 
+      margin-bottom: 30px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #ecf0f1;
+    }
+    h3 { 
+      font-size: 1.6rem; 
+      margin: 28px 0 20px;
+      color: #2980b9;
+    }
+    h4 { 
+      font-size: 1.3rem; 
+      margin: 24px 0 16px;
+      color: #34495e;
+    }
+    
+    /* 文字內容改進 */
+    p { 
+      font-size: 16px; 
+      line-height: 1.8; 
+      margin-bottom: 18px;
+      color: #34495e;
+    }
+    
+    li { 
+      font-size: 16px; 
+      line-height: 1.7; 
+      margin-bottom: 8px;
+      color: #34495e;
+    }
+    
+    ul, ol { 
+      margin-left: 24px; 
+      margin-bottom: 24px; 
+    }
+    
+    /* 表格美化 */
+    table { 
+      width: 100%; 
+      border-collapse: collapse; 
+      margin: 24px 0; 
+      background: #fafbfc;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    
+    th, td { 
+      border: 1px solid #e1e8ed; 
+      padding: 14px 16px; 
+      text-align: left;
+      vertical-align: top;
+    }
+    
+    th { 
+      background: #f8f9fa; 
+      font-weight: 600; 
+      color: var(--primary);
+      font-size: 15px;
+    }
+    
+    td {
+      font-size: 15px;
       line-height: 1.6;
     }
+    
+    /* 圖表容器改進 */
+    .chart-container { 
+      width: 100%; 
+      max-width: 500px; 
+      margin: 32px auto; 
+      padding: 20px;
+      background: #fafbfc;
+      border-radius: 12px;
+      border: 1px solid #e1e8ed;
+    }
+    
+    canvas { 
+      width: 100% !important; 
+      height: auto !important; 
+    }
+    
+    /* 公式樣式大幅改進 */
+    .formula { 
+      background: linear-gradient(135deg, #f6f9fc 0%, #ffffff 100%); 
+      padding: 24px 28px; 
+      border-radius: 12px; 
+      font-family: 'Times New Roman', serif; 
+      margin: 20px 0; 
+      display: block; 
+      font-size: 17px;
+      border-left: 4px solid var(--primary);
+      box-shadow: 0 3px 12px rgba(52, 152, 219, 0.08);
+      line-height: 1.8;
+      border: 1px solid #e8f4f8;
+    }
+    
     .formula-title {
-      font-weight: bold;
-      color: #4a90e2;
-      font-size: 14px;
-      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 15px;
+      margin-bottom: 14px;
       font-family: 'Inter', sans-serif;
     }
+    
     .formula-step {
       background: #f8f9fa;
-      padding: 8px 12px;
-      margin: 6px 0;
-      border-radius: 4px;
-      border-left: 3px solid #28a745;
+      padding: 12px 18px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border-left: 3px solid #27ae60;
       font-family: 'Times New Roman', serif;
+      line-height: 1.7;
     }
+    
     .critical-value {
       background: #fff3cd;
-      padding: 4px 8px;
-      border-radius: 4px;
+      padding: 6px 12px;
+      border-radius: 6px;
       color: #856404;
-      font-weight: bold;
+      font-weight: 600;
+      display: inline-block;
+      margin: 4px 0;
     }
+    
     .result {
       background: #d4edda;
-      padding: 8px 12px;
-      border-radius: 4px;
+      padding: 8px 16px;
+      border-radius: 6px;
       color: #155724;
-      font-weight: bold;
-      margin: 8px 0;
+      font-weight: 600;
+      margin: 10px 0;
+      display: inline-block;
     }
-    .explain { background: #fff8e1; padding: 10px; border-left: 4px solid #ffd54f; margin-bottom: 12px; }
-    .cover-title { font-size: 3rem; margin-bottom: 24px; }
-    .cover-sub { font-size: 1.25rem; color: #666; margin-bottom: 16px; }
-    .members { list-style: none; padding-left: 0; font-size: 1.2rem; }
-    .members li { margin-bottom: 8px; }
+    
+    /* 解釋框美化 */
+    .explain { 
+      background: linear-gradient(135deg, #fff8e1 0%, #fffef7 100%); 
+      padding: 20px 24px; 
+      border-left: 4px solid #f39c12; 
+      margin-bottom: 20px; 
+      border-radius: 8px;
+      line-height: 1.7;
+      border: 1px solid #faeacc;
+    }
+    
+    /* 封面頁面特殊樣式 */
+    .cover-title { 
+      font-size: 3.2rem; 
+      margin-bottom: 32px; 
+      line-height: 1.3;
+      color: #2c3e50;
+    }
+    
+    .cover-sub { 
+      font-size: 1.4rem; 
+      color: #7f8c8d; 
+      margin-bottom: 20px; 
+      line-height: 1.5;
+    }
+    
+    .members { 
+      list-style: none; 
+      padding-left: 0; 
+      font-size: 1.3rem; 
+      line-height: 1.6;
+    }
+    
+    .members li { 
+      margin-bottom: 12px; 
+      color: #34495e;
+    }
     
     /* 封底特殊樣式 */
     .end-slide .card {
@@ -120,16 +264,71 @@
       flex-direction: column;
       justify-content: center;
       min-height: 400px;
+      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
     }
     
     .end-slide h2 {
-      font-size: 2.5rem;
-      margin-bottom: 24px;
+      font-size: 3rem;
+      margin-bottom: 32px;
+      color: var(--primary);
     }
     
     .end-slide p {
-      font-size: 1.25rem;
-      margin-top: 8px;
+      font-size: 1.4rem;
+      margin-top: 12px;
+      color: #7f8c8d;
+    }
+    
+    /* 響應式改進 */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 20px;
+        margin: 20px auto;
+      }
+      
+      .card {
+        padding: 30px 25px;
+      }
+      
+      h1 { font-size: 2.2rem; }
+      h2 { font-size: 1.8rem; }
+      h3 { font-size: 1.4rem; }
+      
+      .formula {
+        padding: 18px 20px;
+        font-size: 15px;
+      }
+      
+      table {
+        font-size: 14px;
+      }
+      
+      th, td {
+        padding: 10px 12px;
+      }
+    }
+    
+    /* 鏈接樣式 */
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: all 0.3s ease;
+    }
+    
+    a:hover {
+      border-bottom-color: var(--primary);
+    }
+    
+    /* 強調文字 */
+    strong {
+      color: #2c3e50;
+      font-weight: 600;
+    }
+    
+    em {
+      color: #7f8c8d;
+      font-style: italic;
     }
   </style>
 </head>
@@ -153,13 +352,18 @@
   <div class="container">
     <div class="card">
       <h2>摘要</h2>
+      <p><strong>研究目的：</strong>透過問卷調查分析年輕族群睡眠時數現況，並檢驗其與生活滿意度認知的關聯。</p>
+      <p><strong>方法：</strong>採用便利抽樣收集50份有效問卷，以19-25歲大專學生為主要群體(50%)，運用多種統計檢定方法分析資料。</p>
+      <p><strong>主要發現：</strong></p>
       <ul>
-        <li>樣本：50 份有效問卷（以19-25歲大專學生為主要群體，佔50%）。</li>
-        <li>平均睡眠：6.22 ± 1.46 小時／晚（95% CI: 5.80-6.64）；t₍₄₉₎ = –3.77, p &lt; 0.001。</li>
-        <li>睡眠不足比例：62％ (31/50)（95% CI: 48.5%-75.5%）；Z = 1.70, p = 0.045。</li>
-        <li>睡眠時數與自覺足夠感相關：χ²(1) = 18.0, p &lt; 0.001，Cramer's V = 0.60。</li>
-        <li>94％ 受試者認為睡眠影響生活滿意度（95% CI: 87.4%-100%）；Z = 6.22, p &lt; 0.0001。</li>
+        <li>平均睡眠時數：6.22±1.46小時，95%CI[5.80-6.64]，顯著低於7小時標準(t=-3.77, p<0.001)。</li>
+        <li>睡眠不足比例：62%(31/50)，95%CI[48.5%-75.5%]，顯著高於50%(Z=1.70, p=0.045)。</li>
+        <li>生活滿意度影響認知：94%(47/50)認為睡眠會影響生活滿意度，95%CI[87.4%-100%]。</li>
+        <li>客觀與主觀一致：睡眠時數與自覺足夠感呈強關聯(χ²=18.0, Cramer's V=0.60, p<0.001)。</li>
+        <li>群體差異：性別間(p=0.347)和年齡組間(p=0.248)睡眠時數無顯著差異。</li>
       </ul>
+      <p><strong>結論：</strong>便利樣本顯示年輕族群普遍存在睡眠不足現象，且對睡眠重要性有高度認知但存在知行落差。</p>
+      <p><strong>限制：</strong>便利抽樣、橫斷面設計、樣本規模有限，結果推廣需謹慎。</p>
     </div>
   </div>
 
@@ -167,8 +371,9 @@
   <div class="container">
     <div class="card">
       <h2>1 研究動機</h2>
-      <p>成人理想睡眠為 7–9 小時╱夜，短睡眠與低滿意度、心理健康不良高度相關 (NSF, 2015)。</p>
-      <p>台灣睡眠醫學學會 2021 年調查：46％ 受訪者睡眠品質不佳，平均僅 6.67 小時。</p>
+      <p>睡眠是影響身心健康的重要因素，然而現代社會中睡眠不足問題日益嚴重。美國國家睡眠基金會(NSF, 2015)建議成人每日睡眠時間應為7-9小時，但實際調查顯示許多人未達此標準。</p>
+      <p>本研究關注的核心問題是：<strong>年輕族群的睡眠狀況是否真的如我們所觀察到的那樣不足？</strong>這個問題促使我們設計問卷調查，以量化的方式驗證我們的假設。</p>
+      <p>我們選擇以大專學生為主要調查對象，因為此群體代表了未來社會的主力，其睡眠習慣將影響長期的生活品質和工作效率。</p>
     </div>
   </div>
 
@@ -205,7 +410,6 @@
         <li><strong>問卷設計：</strong>包含睡眠時數、睡眠足夠感、生活滿意度影響認知及基本人口學資料</li>
         <li><strong>收集期間：</strong>2024年（具體時間可依實際情況調整）</li>
         <li><strong>匿名性：</strong>所有回應完全匿名，保護受試者隱私</li>
-        <li><strong>研究倫理：</strong>參與完全自願，受試者可隨時退出</li>
       </ul>
     </div>
   </div>
@@ -276,23 +480,31 @@
       </table>
       
       <div class="formula">
-        <div class="formula-title">步驟 1：計算標準誤 (Standard Error)</div>
+        <div class="formula-title">步驟 1：計算標準誤 (量化樣本均值的抽樣誤差)</div>
+        <strong>統計目的：</strong>估計如果重複抽樣，樣本均值的變異程度<br>
+        <strong>用於：</strong>t統計量的分母，標準化樣本均值與假設值的差距<br>
         SE = s/√n = 1.46/√50 = 1.46/7.071 = 0.207
       </div>
       
       <div class="formula">
-        <div class="formula-title">步驟 2：計算 t 統計量</div>
+        <div class="formula-title">步驟 2：計算 t 統計量 (標準化檢定統計量)</div>
+        <strong>統計目的：</strong>將樣本均值與假設值的差距標準化為t分佈<br>
+        <strong>用於：</strong>與臨界值比較，決定是否拒絕虛無假設<br>
         t = (x̄ - μ₀)/SE = (6.22 - 7)/0.207 = -0.78/0.207 = -3.77
       </div>
       
       <div class="formula">
-        <div class="formula-title">步驟 3：查臨界值與決策</div>
+        <div class="formula-title">步驟 3：查臨界值與決策 (假設檢定的核心)</div>
+        <strong>統計目的：</strong>確定在α=0.05下，拒絕H₀的臨界值<br>
+        <strong>決策準則：</strong>如果|t統計量| > 臨界值，則拒絕虛無假設<br>
         <span class="critical-value">t₀.₀₅,₄₉ = -1.677 (單尾)</span><br>
         決策準則：|t| = 3.77 > 1.677 → <span class="result">拒絕 H₀</span>
       </div>
       
       <div class="formula">
-        <div class="formula-title">步驟 4：95% 信賴區間</div>
+        <div class="formula-title">步驟 4：95% 信賴區間 (母體參數的區間估計)</div>
+        <strong>統計目的：</strong>估計母體平均睡眠時數的可能範圍<br>
+        <strong>解釋意義：</strong>95%的信心水準下，真實母體均值落在此區間內<br>
         CI = x̄ ± t₀.₀₂₅,₄₉ × SE = 6.22 ± 2.009 × 0.207<br>
         CI = 6.22 ± 0.416 = <strong>[5.80, 6.64]</strong>
       </div>
@@ -319,30 +531,40 @@
       </table>
       
       <div class="formula">
-        <div class="formula-title">步驟 1：檢查正態近似條件</div>
+        <div class="formula-title">步驟 1：檢查正態近似條件 (確保Z檢定的適用性)</div>
+        <strong>統計目的：</strong>驗證二項分佈是否可用正態分佈近似<br>
+        <strong>理論依據：</strong>當nπ₀≥5且n(1-π₀)≥5時，中央極限定理適用<br>
         nπ₀ = 50 × 0.5 = 25 ≥ 5 ✓<br>
         n(1-π₀) = 50 × 0.5 = 25 ≥ 5 ✓<br>
         <span class="result">正態近似條件滿足</span>
       </div>
       
       <div class="formula">
-        <div class="formula-title">步驟 2：計算標準誤</div>
+        <div class="formula-title">步驟 2：計算標準誤 (比例抽樣分佈的標準差)</div>
+        <strong>統計目的：</strong>在虛無假設為真的條件下，估計樣本比例的變異性<br>
+        <strong>用於：</strong>標準化Z統計量，將比例差異轉換為標準正態分佈<br>
         SE = √[π₀(1-π₀)/n] = √[0.5 × 0.5/50] = √(0.25/50) = √0.005 = 0.071
       </div>
       
       <div class="formula">
-        <div class="formula-title">步驟 3：計算 Z 統計量</div>
+        <div class="formula-title">步驟 3：計算 Z 統計量 (標準化檢定統計量)</div>
+        <strong>統計目的：</strong>測量樣本比例與假設比例的標準化距離<br>
+        <strong>理論基礎：</strong>在H₀為真時，Z統計量服從標準正態分佈N(0,1)<br>
         Z = (p̂ - π₀)/SE = (0.62 - 0.5)/0.071 = 0.12/0.071 = 1.70
       </div>
       
       <div class="formula">
-        <div class="formula-title">步驟 4：查臨界值與決策</div>
+        <div class="formula-title">步驟 4：查臨界值與決策 (假設檢定的統計推論)</div>
+        <strong>統計目的：</strong>在α=0.05的顯著水準下，決定是否拒絕虛無假設<br>
+        <strong>決策邏輯：</strong>單尾檢定中，如果Z > Z₀.₀₅，則拒絕H₀<br>
         <span class="critical-value">Z₀.₀₅ = 1.645 (單尾)</span><br>
         決策準則：Z = 1.70 > 1.645 → <span class="result">拒絕 H₀</span>
       </div>
       
       <div class="formula">
-        <div class="formula-title">步驟 5：95% 信賴區間（雙尾）</div>
+        <div class="formula-title">步驟 5：95% 信賴區間 (母體比例的區間估計)</div>
+        <strong>統計目的：</strong>估計母體中真實的睡眠不足比例範圍<br>
+        <strong>實用意義：</strong>提供政策制定和資源配置的參考區間<br>
         CI = p̂ ± Z₀.₀₂₅ × √[p̂(1-p̂)/n]<br>
         CI = 0.62 ± 1.96 × √[0.62 × 0.38/50]<br>
         CI = 0.62 ± 1.96 × 0.069 = 0.62 ± 0.135 = <strong>[0.485, 0.755]</strong>
@@ -409,30 +631,40 @@
       </table>
       
       <div class="formula">
-        <div class="formula-title">步驟 1：計算差值統計量</div>
+        <div class="formula-title">步驟 1：計算差值統計量 (配對設計的核心概念)</div>
+        <strong>統計目的：</strong>將配對數據轉換為單一差值變數，控制個體差異<br>
+        <strong>優勢：</strong>消除個體間變異，提高檢定的統計功效<br>
         樣本差值平均：d̄ = x̄₁ - x̄₂ = 6.22 - 7.50 = -1.28<br>
         差值標準差：s_d = 1.20（估計值）<br>
         自由度：df = n - 1 = 50 - 1 = 49
       </div>
       
       <div class="formula">
-        <div class="formula-title">步驟 2：計算標準誤</div>
+        <div class="formula-title">步驟 2：計算標準誤 (差值分佈的抽樣誤差)</div>
+        <strong>統計目的：</strong>估計差值平均數的抽樣變異程度<br>
+        <strong>理論基礎：</strong>用於構建t統計量，檢定平均差值是否顯著不為零<br>
         SE_d = s_d/√n = 1.20/√50 = 1.20/7.071 = 0.170
       </div>
       
       <div class="formula">
-        <div class="formula-title">步驟 3：計算 t 統計量</div>
+        <div class="formula-title">步驟 3：計算 t 統計量 (配對t檢定的核心)</div>
+        <strong>統計目的：</strong>檢定實際與理想睡眠時數是否存在顯著差異<br>
+        <strong>假設檢定：</strong>H₀:μ_d=0 vs H₁:μ_d≠0<br>
         t = d̄/(s_d/√n) = (-1.28)/0.170 = -7.53
       </div>
       
       <div class="formula">
-        <div class="formula-title">步驟 4：查臨界值與決策</div>
+        <div class="formula-title">步驟 4：查臨界值與決策 (雙尾檢定的統計推論)</div>
+        <strong>統計目的：</strong>在α=0.05的顯著水準下，檢定差異是否具統計顯著性<br>
+        <strong>實際意義：</strong>確認受試者的實際睡眠是否真的不足<br>
         <span class="critical-value">t₀.₀₂₅,₄₉ = ±2.009 (雙尾)</span><br>
         決策準則：|t| = 7.53 > 2.009 → <span class="result">拒絕 H₀</span>
       </div>
       
       <div class="formula">
-        <div class="formula-title">步驟 5：95% 信賴區間</div>
+        <div class="formula-title">步驟 5：95% 信賴區間 (睡眠不足程度的區間估計)</div>
+        <strong>統計目的：</strong>估計平均睡眠不足時數的可能範圍<br>
+        <strong>政策意義：</strong>提供改善目標的量化指標<br>
         CI = d̄ ± t₀.₀₂₅,₄₉ × SE_d<br>
         CI = -1.28 ± 2.009 × 0.170<br>
         CI = -1.28 ± 0.342 = <strong>[-1.62, -0.94]</strong>
@@ -460,37 +692,49 @@
       </table>
       
       <div class="formula">
-        <div class="formula-title">步驟 1：檢驗等變異數假設（Levene's test 概念）</div>
+        <div class="formula-title">步驟 1：檢驗等變異數假設 (獨立t檢定的前提條件)</div>
+        <strong>統計目的：</strong>確定是否應使用等變異數假設下的合併標準差<br>
+        <strong>決策準則：</strong>F比值<4通常可接受等變異數假設<br>
         F = s₁²/s₂² = 2.31/1.99 = 1.16 < 4 → <span class="result">等變異數假設合理</span>
       </div>
       
       <div class="formula">
-        <div class="formula-title">步驟 2：計算合併標準差</div>
+        <div class="formula-title">步驟 2：計算合併標準差 (兩組數據的共同變異估計)</div>
+        <strong>統計目的：</strong>結合兩組樣本的變異信息，提供更穩定的變異估計<br>
+        <strong>數學原理：</strong>加權平均兩組變異數，權重為各組的自由度<br>
         s_p = √[((n₁-1)s₁² + (n₂-1)s₂²)/(n₁+n₂-2)]<br>
         s_p = √[((21-1)×2.31 + (29-1)×1.99)/(21+29-2)]<br>
         s_p = √[(20×2.31 + 28×1.99)/48] = √[(46.2 + 55.72)/48] = √[101.92/48] = √2.12 = 1.46
       </div>
       
       <div class="formula">
-        <div class="formula-title">步驟 3：計算標準誤</div>
+        <div class="formula-title">步驟 3：計算標準誤 (兩組均值差的抽樣誤差)</div>
+        <strong>統計目的：</strong>估計兩組樣本均值差的抽樣變異程度<br>
+        <strong>用於：</strong>標準化t統計量，檢定兩組是否來自相同母體<br>
         SE = s_p × √(1/n₁ + 1/n₂) = 1.46 × √(1/21 + 1/29)<br>
         SE = 1.46 × √(0.0476 + 0.0345) = 1.46 × √0.0821 = 1.46 × 0.287 = 0.419
       </div>
       
       <div class="formula">
-        <div class="formula-title">步驟 4：計算 t 統計量</div>
+        <div class="formula-title">步驟 4：計算 t 統計量 (兩組比較的檢定統計量)</div>
+        <strong>統計目的：</strong>檢定男女性睡眠時數是否存在顯著差異<br>
+        <strong>假設檢定：</strong>H₀:μ₁=μ₂ vs H₁:μ₁≠μ₂<br>
         t = (x̄₁ - x̄₂)/SE = (6.45 - 6.05)/0.419 = 0.40/0.419 = 0.95
       </div>
       
       <div class="formula">
-        <div class="formula-title">步驟 5：統計決策</div>
+        <div class="formula-title">步驟 5：統計決策 (假設檢定的結論)</div>
+        <strong>統計目的：</strong>在α=0.05的顯著水準下，決定是否拒絕虛無假設<br>
+        <strong>實際意義：</strong>確認性別是否為睡眠時數的影響因子<br>
         df = n₁ + n₂ - 2 = 21 + 29 - 2 = 48<br>
         <span class="critical-value">t₀.₀₂₅,₄₈ = ±2.011 (雙尾)</span><br>
         決策準則：|t| = 0.95 < 2.011 → <span class="result">不拒絕 H₀</span>
       </div>
       
       <div class="formula">
-        <div class="formula-title">步驟 6：95% 信賴區間</div>
+        <div class="formula-title">步驟 6：95% 信賴區間 (兩組差異的區間估計)</div>
+        <strong>統計目的：</strong>估計男女性睡眠時數真實差異的可能範圍<br>
+        <strong>解釋意義：</strong>若區間包含0，表示可能無差異<br>
         CI = (x̄₁ - x̄₂) ± t₀.₀₂₅,₄₈ × SE<br>
         CI = 0.40 ± 2.011 × 0.419 = 0.40 ± 0.843 = <strong>[-0.44, 1.24]</strong>
       </div>
@@ -550,7 +794,10 @@
       </div>
       
       <div class="formula">
-        <div class="formula-title">步驟 1：計算期望頻數 (Expected Frequencies)</div>
+        <div class="formula-title">步驟 1：計算期望頻數 (獨立性假設下的理論頻數)</div>
+        <strong>統計目的：</strong>在兩變項獨立的假設下，計算各格子的理論期望頻數<br>
+        <strong>計算原理：</strong>期望頻數 = (列總和 × 行總和) / 總樣本數<br>
+        <strong>用於：</strong>與觀察頻數比較，檢驗是否存在關聯性<br>
         E₁₁ = (R₁ × C₁)/N = (19 × 23)/50 = 8.74<br>
         E₁₂ = (R₁ × C₂)/N = (19 × 27)/50 = 10.26<br>
         E₂₁ = (R₂ × C₁)/N = (31 × 23)/50 = 14.26<br>
@@ -558,12 +805,17 @@
       </div>
       
       <div class="formula">
-        <div class="formula-title">步驟 2：檢查期望頻數條件</div>
+        <div class="formula-title">步驟 2：檢查期望頻數條件 (卡方檢定的適用性驗證)</div>
+        <strong>統計目的：</strong>確保卡方分佈的近似效果良好<br>
+        <strong>理論要求：</strong>所有期望頻數應≥5，才能使用卡方分佈<br>
         所有 E_ij ≥ 5：8.74, 10.26, 14.26, 16.74 → <span class="result">條件滿足</span>
       </div>
       
       <div class="formula">
-        <div class="formula-title">步驟 3：計算卡方統計量</div>
+        <div class="formula-title">步驟 3：計算卡方統計量 (觀察與期望的偏差測量)</div>
+        <strong>統計目的：</strong>量化觀察頻數與期望頻數的總體偏差程度<br>
+        <strong>數學意義：</strong>每個格子的標準化偏差平方和<br>
+        <strong>分佈理論：</strong>在獨立假設下，服從卡方分佈<br>
         χ² = Σ[(O_ij - E_ij)²/E_ij]<br>
         χ² = [(16-8.74)²/8.74] + [(3-10.26)²/10.26] + [(7-14.26)²/14.26] + [(24-16.74)²/16.74]<br>
         χ² = [52.73/8.74] + [52.73/10.26] + [52.73/14.26] + [52.73/16.74]<br>
@@ -571,14 +823,20 @@
       </div>
       
       <div class="formula">
-        <div class="formula-title">步驟 4：統計決策</div>
+        <div class="formula-title">步驟 4：統計決策 (關聯性的假設檢定)</div>
+        <strong>統計目的：</strong>檢定兩變項是否統計獨立<br>
+        <strong>假設檢定：</strong>H₀:兩變項獨立 vs H₁:兩變項有關聯<br>
+        <strong>實際意義：</strong>確認睡眠時數與主觀感受是否一致<br>
         df = (行數-1) × (列數-1) = (2-1) × (2-1) = 1<br>
         <span class="critical-value">χ²₀.₀₅,₁ = 3.841</span><br>
         決策準則：χ² = 18.02 > 3.841 → <span class="result">拒絕 H₀</span>
       </div>
       
       <div class="formula">
-        <div class="formula-title">步驟 5：效果量計算</div>
+        <div class="formula-title">步驟 5：效果量計算 (關聯強度的量化)</div>
+        <strong>統計目的：</strong>測量兩變項關聯的實際強度，補充統計顯著性<br>
+        <strong>Cramer's V 解釋：</strong>0.1(小)、0.3(中)、0.5(大效果)<br>
+        <strong>實用價值：</strong>評估關聯性的實際重要性<br>
         Cramer's V = √(χ²/N) = √(18.02/50) = √0.360 = <strong>0.60</strong><br>
         效果量解釋：V = 0.60 為大效果量（V ≥ 0.5）
       </div>
@@ -676,25 +934,25 @@
   <div class="container">
     <div class="card">
       <h2>7 討論</h2>
-      <h3>7.1 主要發現解釋</h3>
+      <h3>7.1 主要發現與基準比較</h3>
       <ul>
-        <li><strong>睡眠時數不足：</strong>樣本平均睡眠 6.22 小時，95%信賴區間為 5.80-6.64 小時，顯著低於 NSF (2015) 建議的 7–9 小時。即使是區間上限 6.64 小時也未達建議標準。</li>
-        <li><strong>普遍睡眠不足：</strong>62% 受試者睡眠不足（&lt;7小時），母體真實比例可能介於 48.5%-75.5%，顯示問題普遍存在。</li>
-        <li><strong>強烈關聯性：</strong>睡眠時數與自覺足夠感呈現大效果量關聯（Cramer's V = 0.60），證實客觀與主觀睡眠評估的一致性。</li>
-        <li><strong>高度認知：</strong>94% 受試者認為睡眠影響生活滿意度，信賴區間下限達 87.4%，顯示此認知具有高度一致性。</li>
+        <li><strong>與標準建議的對比：</strong>本研究樣本平均睡眠6.22小時，95%信賴區間為5.80-6.64小時，明顯低於NSF(2015)建議的7-9小時。這個發現透過嚴謹的統計檢驗得到確認(t=-3.77, p<0.001)，並非偶然現象。</li>
+        <li><strong>與現有調查的比較基礎：</strong>雖然我們的調查規模有限(n=50)，但結果顯示的趨勢值得關注。未來可與大規模流行病學調查比較，驗證是否存在類似模式。</li>
+        <li><strong>主觀與客觀的一致性：</strong>62%受試者睡眠不足(<7小時)，且睡眠時數與自覺足夠感呈現強關聯(Cramer's V=0.60)，顯示受試者對自身睡眠狀況有準確認知。</li>
       </ul>
       
-      <h3>7.2 樣本特徵影響</h3>
+      <h3>7.2 研究發現的意義</h3>
       <ul>
-        <li>樣本以19-25歲大專學生為主(50%)，此年齡層睡眠不足現象可能與學業壓力、生活作息不規律、夜間社交活動相關。</li>
-        <li>便利樣本的限制使結果推論至一般母體需謹慎，但信賴區間提供了不確定性的量化估計。</li>
+        <li><strong>問題普遍性：</strong>94%受試者認為睡眠會影響生活滿意度，顯示此議題的重要性已被廣泛認知，但知行差距明顯。</li>
+        <li><strong>年齡特徵：</strong>以19-25歲大專學生為主的樣本，反映了特定生命階段的睡眠挑戰，可能與課業壓力、生活型態轉變相關。</li>
       </ul>
       
-      <h3>7.3 研究限制</h3>
+      <h3>7.3 研究限制的誠實報告</h3>
       <ul>
         <li><strong>設計限制：</strong>橫斷面設計僅能建立關聯性，無法證明因果關係。</li>
-        <li><strong>測量限制：</strong>生活滿意度缺乏標準化量表，影響結果的信效度。</li>
-        <li><strong>抽樣限制：</strong>便利樣本影響外部效度，信賴區間僅適用於類似母體。</li>
+        <li><strong>測量限制：</strong>缺乏標準化睡眠品質量表，生活滿意度測量過於簡化。</li>
+        <li><strong>抽樣限制：</strong>便利樣本影響外部效度，結果推廣需謹慎。</li>
+        <li><strong>比較基礎有限：</strong>缺乏同期、同地區的大規模對照數據。</li>
       </ul>
     </div>
   </div>
@@ -703,25 +961,31 @@
   <div class="container">
     <div class="card">
       <h2>8 結論與建議</h2>
-      <h3>8.1 主要結論</h3>
-      <p><strong>統計證據：</strong>本便利樣本提供明確統計證據顯示，年輕族群平均睡眠時數顯著低於建議標準，且多數人認知到睡眠對生活滿意度的重要性。</p>
+      <h3>8.1 基於研究證據的結論</h3>
+      <p><strong>核心發現：</strong>本調查提供了明確的統計證據，顯示受調查的年輕族群平均睡眠時數顯著低於一般建議標準，且此現象具有統計顯著性和實際意義。</p>
       
-      <h3>8.2 基於信賴區間的發現</h3>
+      <h3>8.2 統計證據支持的發現</h3>
       <ul>
-        <li><strong>睡眠不足確定性高：</strong>平均睡眠時數95%信賴區間為5.80-6.64小時，區間完全低於建議的7小時。</li>
-        <li><strong>問題普遍存在：</strong>睡眠不足比例真值可能高達75.5%，顯示問題嚴重性。</li>
-        <li><strong>認知高度一致：</strong>87.4%-100%的人認為睡眠影響滿意度，認知與行為存在落差。</li>
+        <li><strong>睡眠不足確定性：</strong>平均睡眠時數95%信賴區間[5.80-6.64小時]完全低於7小時建議標準。</li>
+        <li><strong>問題普遍性：</strong>62%受試者睡眠不足，真實比例可能高達75.5%。</li>
+        <li><strong>認知行為落差：</strong>94%的人認知睡眠重要性，但實際行為未能配合。</li>
+        <li><strong>主客觀一致：</strong>客觀睡眠時數與主觀感受高度相關(V=0.60)。</li>
       </ul>
       
-      <h3>8.3 謹慎建議</h3>
+      <h3>8.3 謹慎的建議</h3>
+      <p><strong>基於本研究限制，以下建議需審慎解讀：</strong></p>
       <ul>
-        <li><strong>個人層面：</strong>建立規律作息、改善睡眠環境、減少睡前螢幕使用。</li>
-        <li><strong>教育機構：</strong>考慮將睡眠衛教納入健康課程，強化知行合一。</li>
-        <li><strong>政策參考：</strong>信賴區間顯示問題的一致性，可作為相關政策制定參考。</li>
-        <li><strong>後續研究：</strong>建議擴大隨機樣本驗證這些區間估計的穩健性。</li>
+        <li><strong>個人認知層面：</strong>調查顯示知行落差明顯，個人可思考如何將睡眠重要性的認知轉化為實際行動。</li>
+        <li><strong>教育層面：</strong>鑑於大專學生佔主要比例，教育機構可考慮將睡眠議題納入健康教育。</li>
+        <li><strong>研究方法改進：</strong>未來研究建議採用更大樣本、標準化測量工具、縱向追蹤設計。</li>
+        <li><strong>政策參考價值：</strong>雖然樣本有限，但一致的統計結果可作為更大規模調查的參考基礎。</li>
       </ul>
       
-      <p><em>註：所有推論基於95%信賴水準，結果推廣至不同母體需考慮樣本代表性。</em></p>
+      <h3>8.4 研究貢獻與限制</h3>
+      <p><strong>貢獻：</strong>提供了本地年輕族群睡眠狀況的量化數據，運用了完整的統計推論方法。</p>
+      <p><strong>限制：</strong>便利抽樣、橫斷面設計、樣本規模有限，結果推廣需要更多研究驗證。</p>
+      
+      <p><em>註：本研究結果基於特定樣本，任何建議都應在更大規模驗證後方可推廣應用。</em></p>
     </div>
   </div>
 
@@ -750,11 +1014,35 @@
   <div class="container">
     <div class="card">
       <h2>10 參考文獻</h2>
+      <p><strong>註：</strong>以下文獻主要用於提供睡眠時間建議標準的參考基準，以及統計方法的理論依據。</p>
+      
+      <h3>10.1 主要參考文獻</h3>
       <ol>
-        <li>National Sleep Foundation. Sleep Time Duration Recommendations. Sleep Health 1(1), 40-43 (2015).</li>
-        <li>台灣睡眠醫學學會．「飽睡好眠 活力一整天」行動方案（2021）。</li>
-        <li>Lin, X.-Y. et al. Sleep duration predicts life satisfaction: A longitudinal ARCL study. Frontiers in Sleep (2024).</li>
+        <li><strong>Hirshkowitz, M., Whiton, K., Albert, S. M., et al.</strong> (2015). National Sleep Foundation's sleep time duration recommendations: methodology and results summary. <em>Sleep Health</em>, 1(1), 40-43.
+        <br><em>用途：提供成人睡眠時間建議標準(7-9小時)，作為本研究假設檢定的基準值。</em></li>
+        
+        <li><strong>Cohen, J.</strong> (1988). <em>Statistical Power Analysis for the Behavioral Sciences</em> (2nd ed.). Lawrence Erlbaum Associates.
+        <br><em>用途：效果量(Cohen's d, Cohen's h)的計算標準和解釋依據。</em></li>
+        
+        <li><strong>Moore, D. S., McCabe, G. P., & Craig, B. A.</strong> (2017). <em>Introduction to the Practice of Statistics</em> (8th ed.). W. H. Freeman.
+        <br><em>用途：統計檢定方法(t檢定、Z檢定、卡方檢定)的理論基礎和計算公式。</em></li>
       </ol>
+      
+      <h3>10.2 統計軟體與工具</h3>
+      <ul>
+        <li>Google Forms：線上問卷設計與資料收集平台</li>
+        <li>Chart.js：資料視覺化圖表製作</li>
+        <li>統計計算：手工計算配合統計公式驗證</li>
+      </ul>
+      
+      <h3>10.3 文獻引用說明</h3>
+      <p>本研究主要為方法學練習，重點在於統計分析技術的應用。文獻引用遵循簡化原則，僅引用：</p>
+      <ul>
+        <li>提供客觀標準的權威機構建議(NSF)</li>
+        <li>統計方法的經典教科書</li>
+        <li>效果量計算的標準參考</li>
+      </ul>
+      <p><em>未來如需發表，將補充更完整的文獻回顧，包括睡眠與生活滿意度關係的實證研究、年輕族群睡眠模式的流行病學調查等。</em></p>
     </div>
   </div>
 
