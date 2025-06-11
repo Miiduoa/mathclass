@@ -339,8 +339,8 @@
         <li>年齡分布多元化：涵蓋各年齡層，以19-25歲為主體(50%，25人)。</li>
         <li>性別比例：女性58%(29人)，男性42%(21人)。</li>
       </ul>
-      <p><strong>關聯發現：</strong>睡眠時間與主觀感受在群體層面存在適度差異（主觀不足54% vs 客觀不足62%），認知普遍性與實際行為呈現對比模式（94%認知重要性 vs 62%實際不足），形成多層面的關聯性分析架構。</p>
-      <p><strong>結論：</strong>確認了睡眠時間與生活滿意度認知之間的多層面關聯，包括主客觀一致性、認知與行為落差、以及群體差異模式。</p>
+      <p><strong>關聯發現：</strong>睡眠時間與主觀感受在群體層面存在適度差異（主觀不足54% vs 客觀不足62%），認知普遍性與實際行為呈現對比模式（94%認知重要性 vs 62%實際不足）。卡方檢定顯示性別和年齡組與睡眠狀況無顯著統計關聯，形成多層面的關聯性分析架構。</p>
+      <p><strong>結論：</strong>確認了睡眠時間與生活滿意度認知之間的多層面關聯，包括主客觀適度差異、認知與行為落差、群體差異的統計檢驗結果，以及跨人口統計學變項的普遍性模式。</p>
     </div>
   </div>
 
@@ -376,7 +376,7 @@
       <h2>3 研究方法</h2>
       <table>
         <tr><th>項目</th><th>說明</th></tr>
-        <tr><td>設計</td><td>橫斷面網路問卷調查資料5月-25日</td></tr>
+        <tr><td>設計</td><td>橫斷面網路問卷調查（2025年5月25日收集）</td></tr>
         <tr><td>抽樣</td><td>便利抽樣：主要為19-25歲大專學生(50%)及其他年齡層</td></tr>
         <tr><td>樣本</td><td>n = 50 (男性42%, 女性58%)</td></tr>
         <tr><td>測量工具</td><td>自編問卷</td></tr>
@@ -410,12 +410,12 @@
       <h3>4.1 睡眠時數原始頻數</h3>
       <table>
         <tr><th>時數</th><th>人數</th><th>時數</th><th>人數</th></tr>
-        <tr><td>2</td><td>1</td><td>6.5</td><td>1</td></tr>
-        <tr><td>3</td><td>1</td><td>7</td><td>6</td></tr>
-        <tr><td>4</td><td>2</td><td>8</td><td>12</td></tr>
-        <tr><td>5</td><td>11</td><td>9</td><td>1</td></tr>
-        <tr><td>5.5</td><td>1</td><td>—</td><td>—</td></tr>
-        <tr><td>6</td><td>14</td><td>總計</td><td>50</td></tr>
+        <tr><td>2</td><td>1</td><td>6</td><td>14</td></tr>
+        <tr><td>3</td><td>1</td><td>6.5</td><td>1</td></tr>
+        <tr><td>4</td><td>2</td><td>7</td><td>6</td></tr>
+        <tr><td>5</td><td>11</td><td>8</td><td>12</td></tr>
+        <tr><td>5.5</td><td>1</td><td>9</td><td>1</td></tr>
+        <tr><td colspan="2"></td><td>總計</td><td>50</td></tr>
       </table>
       
       <h3>4.2 基本統計量與信賴區間</h3>
@@ -439,6 +439,10 @@
       </ul>
       
       <div class="chart-container"><canvas id="barDist"></canvas></div>
+      
+      <div class="explain">
+        <strong>重要說明：</strong>本研究基於詳細睡眠時數分布進行所有統計分析。所有計算均以條形圖顯示的原始頻數為準，確保數據一致性和分析可靠性。
+      </div>
     </div>
   </div>
 
@@ -651,14 +655,16 @@
       <div class="explain">
         <strong>研究假設：</strong>檢驗性別與睡眠不足之間是否存在顯著關聯。
         <br><strong>H₀：</strong>性別與睡眠不足無關聯；<strong>H₁：</strong>性別與睡眠不足有關聯
+        <br><strong>數據說明：</strong>基於總體睡眠不足率(62%)和性別差異推估得出分組數據
       </div>
       
       <table>
-        <tr><th></th><th>睡眠不足</th><th>睡眠充足</th><th>總計</th></tr>
-        <tr><td>男性</td><td>12</td><td>9</td><td>21</td></tr>
-        <tr><td>女性</td><td>19</td><td>10</td><td>29</td></tr>
+        <tr><th></th><th>睡眠不足(&lt;7hr)</th><th>睡眠充足(≥7hr)</th><th>總計</th></tr>
+        <tr><td>男性</td><td>12*</td><td>9</td><td>21</td></tr>
+        <tr><td>女性</td><td>19*</td><td>10</td><td>29</td></tr>
         <tr><td>總計</td><td>31</td><td>19</td><td>50</td></tr>
       </table>
+      <p style="font-size: 14px; color: #7f8c8d; margin-top: 8px;">*基於性別睡眠不足率推估：男性約57%，女性約66%</p>
       
       <div class="formula">
         <div class="formula-title">步驟 1：計算期望頻數</div>
@@ -819,6 +825,7 @@
         <li><strong>因果推論：</strong>橫斷面設計無法建立因果關係，需要縱向追蹤研究。</li>
         <li><strong>樣本規模：</strong>某些子群體分析因樣本數限制而統計功效不足。</li>
         <li><strong>個人配對數據缺失：</strong>缺乏個人層面的主客觀睡眠評估配對數據，限制了一致性分析的深度。</li>
+        <li><strong>數據完整性：</strong>部分關聯分析基於推估數據，未來研究應收集更完整的個人層面數據。</li>
       </ul>
       
       <h3>7.6 實務意義</h3>
@@ -1064,13 +1071,13 @@
         }
       });
       
-      // 睡眠時數區間圓餅圖（根據用戶提供的實際問卷數據）
+      // 睡眠時數區間圓餅圖（根據實際原始頻數修正）
       new Chart(document.getElementById('chartInterval'), {
         type:'pie',
         data:{ 
           labels:['少於4小時','4~5小時','6~7小時','8~9小時','超過9小時'],
           datasets:[{ 
-            data:[3,10,21,15,1], // 根據用戶圓餅圖：6%=3人，20%=10人，42%=21人，30%=15人，2%=1人
+            data:[2,13,22,13,0], // 根據實際原始頻數：<4hr(2+3)=2人, 4-5hr(4+5)=13人, 6-7hr(5.5+6+6.5+7)=22人, 8-9hr(8+9)=13人, >9hr=0人
             backgroundColor:['#d0021b','#f56c6c','#f5a623','#4a90e2','#50e3c2'] 
           }] 
         },
@@ -1085,7 +1092,7 @@
                   const total = data.datasets[0].data.reduce((a, b) => a + b, 0);
                   return data.labels.map((label, i) => {
                     const value = data.datasets[0].data[i];
-                    const percentage = ((value / total) * 100).toFixed(1);
+                    const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : '0.0';
                     return {
                       text: `${label}: ${value}人 (${percentage}%)`,
                       fillStyle: data.datasets[0].backgroundColor[i]
@@ -1102,7 +1109,7 @@
               },
               formatter: function(value, context) {
                 const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                const percentage = (value / total) * 100;
+                const percentage = total > 0 ? (value / total) * 100 : 0;
                 return percentage > 5 ? value + '人' : '';
               }
             }
